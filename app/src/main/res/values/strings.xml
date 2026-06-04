@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">dndhepler</string>
+    <string name="main_name_1">Dungeon&amp;Dragons</string>
+    <string name="main_name_2">Helper</string>
+    <string name="button_bestiary">Бестиарий</string>
+    <string name="button_spells">Заклинания</string>
+    <string name="button_mech">Игровые механики</string>
+    <string name="bestiary14">Бестиарий 14</string>
+    <string name="bestiary24">Бестиарий 24</string>
+    <string name="spells14">Заклинания 14</string>
+    <string name="spells24">Заклинания 24</string>
+    <string name="waitBetiary24">Бестиарий 24: ожидание</string>
+    <string name="waitBetiary14">Бестиарий 14: ожидание</string>
+    <string name="waitSpells24">Заклинания 24: ожидание</string>
+    <string name="waitSpells14">Заклинания 14: ожидание</string>
+    <string name="filter">Фильтр</string>
+    <string name="back">Назад</string>
+    <string name="thanks">Спасибо</string>
+    <string name="download">Загрузить</string>
+    <string name="madness">Безумие</string>
+    <string name="condition">Состояния</string>
+    <string name="equipment">Снаряжение</string>
+</resources>

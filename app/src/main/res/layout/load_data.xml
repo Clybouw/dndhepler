@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24sp"
+    android:background="@color/moccasin">
+
+    <CheckBox
+        android:id="@+id/bestiary24Load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="@string/bestiary24"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
+    <CheckBox
+        android:id="@+id/bestiary14Load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="@string/bestiary14"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
+    <CheckBox
+        android:id="@+id/spells24Load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="@string/spells24"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
+    <CheckBox
+        android:id="@+id/spells14Load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="@string/spells14"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="4dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/thistle"
+            android:fontFamily="serif"
+            android:text="@string/back"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:cornerRadius="0dp" />
+
+        <Button
+            android:id="@+id/start"
+            android:layout_width="4sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="0dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/thistle"
+            android:fontFamily="serif"
+            android:text="@string/download"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:cornerRadius="0dp"/>
+    </LinearLayout>
+</LinearLayout>
