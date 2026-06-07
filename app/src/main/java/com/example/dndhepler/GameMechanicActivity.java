@@ -11,12 +11,9 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import org.w3c.dom.Text;
-
-public class GameMechanicActivity extends AppCompatActivity {
+public class GameMechanicActivity extends BaseActivity {
 
     private Toolbar toolbar;
 
@@ -30,7 +27,8 @@ public class GameMechanicActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         TextView madnessView = findViewById(R.id.madness_view);
         TextView conditionsView = findViewById(R.id.condition_view);
-        TextView equipmentView = findViewById(R.id.equipment_view);
+        TextView armorsView = findViewById(R.id.armor_view);
+        TextView weaponsView = findViewById(R.id.weapon_view);
 
         madnessView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,10 +46,18 @@ public class GameMechanicActivity extends AppCompatActivity {
             }
         });
 
-        equipmentView.setOnClickListener(new View.OnClickListener() {
+        armorsView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GameMechanicActivity.this, EquipmentActivity.class);
+                Intent intent = new Intent(GameMechanicActivity.this, ArmorsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        weaponsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GameMechanicActivity.this, WeaponsActivity.class);
                 startActivity(intent);
             }
         });

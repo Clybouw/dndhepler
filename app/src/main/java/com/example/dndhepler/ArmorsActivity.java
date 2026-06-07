@@ -21,18 +21,18 @@ import org.json.JSONObject;
 
 import java.io.FileInputStream;
 
-public class EquipmentActivity extends BaseActivity {
+public class ArmorsActivity extends BaseActivity {
 
     private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_equipment);
+        setContentView(R.layout.activity_armors);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        TextView equipmentName = findViewById(R.id.equipmentName);
+        TextView armorsListName = findViewById(R.id.armorName);
         TextView useArmors = findViewById(R.id.useArmors);
         TextView ACArmors = findViewById(R.id.ACArmors);
         TextView heavyArmorsInfo = findViewById(R.id.heavyArmorsInfo);
@@ -157,19 +157,37 @@ public class EquipmentActivity extends BaseActivity {
         });
         //Щиты
         TextView shieldsList = findViewById(R.id.shields);
-        TextView shields = findViewById(R.id.shield);
+        TextView shield = findViewById(R.id.shield);
         LinearLayout shieldsLayout = findViewById(R.id.shieldLayout);
         TextView shieldInfo = findViewById(R.id.shieldInfo);
-        shields.setOnClickListener(v -> {
+        shield.setOnClickListener(v -> {
             if (shieldsLayout.getVisibility() == View.GONE) {
                 shieldsLayout.setVisibility(View.VISIBLE);
             } else {
                 shieldsLayout.setVisibility(View.GONE);
             }
         });
+        //Надевание и снятие доспехов
+        TextView wearRemoveArmorsList = findViewById(R.id.wearRemoveArmors);
+        TextView wearRemoveLightArmor = findViewById(R.id.wearRemovelightArmor);
+        TextView wearRemoveMediumArmor = findViewById(R.id.wearRemoveMediumArmor);
+        TextView wearRemoveHeavyArmor = findViewById(R.id.wearRemoveHeavyArmor);
+        TextView wearRemoveShield = findViewById(R.id.wearRemoveShield);
+        //Иные доспехи
+        TextView anotherArmorsList = findViewById(R.id.anotherArmors);
+        TextView coverSurvival = findViewById(R.id.coverSurvival);
+        LinearLayout coverSurvivalLayout = findViewById(R.id.coverSurvivalLayout);
+        TextView coverSurvivalInfo = findViewById(R.id.coverSurvivalInfo);
+        coverSurvival.setOnClickListener(v -> {
+            if (coverSurvivalLayout.getVisibility() == View.GONE) {
+                coverSurvivalLayout.setVisibility(View.VISIBLE);
+            } else {
+                coverSurvivalLayout.setVisibility(View.GONE);
+            }
+        });
 
         try {
-            FileInputStream fis = openFileInput("Equipment5e14.json");
+            FileInputStream fis = openFileInput("Armors5e14.json");
             byte[] bytes = new byte[fis.available()];
             fis.read(bytes);
             fis.close();
@@ -177,7 +195,7 @@ public class EquipmentActivity extends BaseActivity {
             JSONArray jsonArray = new JSONArray(json);
             JSONObject obj = jsonArray.getJSONObject(0);
             //Название страницы
-            String equipmentListName = obj.getString("name");
+            String ArmorListName = obj.getString("name");
             //Владение доспехами
             JSONObject useArmor = obj.getJSONObject("useArmors");
             String useArmorName = useArmor.getString("name");
@@ -211,10 +229,13 @@ public class EquipmentActivity extends BaseActivity {
             String heavyArmorName = heavyArmorList.getString("name");
             JSONObject shieldList = allArmors.getJSONObject("shields");
             String shieldName = shieldList.getString("name");
+            JSONObject anotherArmorList = allArmors.getJSONObject("anotherArmors");
+            String anotherArmorName = anotherArmorList.getString("name");
             lightArmorsList.setText(lightArmorName);
             mediumArmorsList.setText(mediumArmorName);
             heavyArmorsList.setText(heavyArmorName);
             shieldsList.setText(shieldName);
+            anotherArmorsList.setText(anotherArmorName);
             //Стеганый
             JSONObject quiltedList = lightArmorList.getJSONObject("quilted");
             String quiltedListName = quiltedList.getString("name");
@@ -323,10 +344,34 @@ public class EquipmentActivity extends BaseActivity {
             String shield1ListStrength = shield1List.getString("strength");
             String shield1ListStealth = shield1List.getString("stealth");
             String shield1ListWeight = shield1List.getString("weight");
+            //Покров выживания
+            JSONObject coverSurvivalList = anotherArmorList.getJSONObject("coverSurvival");
+            String coverSurvivalListName = coverSurvivalList.getString("name");
+            String coverSurvivalListDescription = coverSurvivalList.getString("description");
+            String coverSurvivalListPrice = coverSurvivalList.getString("price");
+            String coverSurvivalListAC = coverSurvivalList.getString("AC");
+            String coverSurvivalListStrength = coverSurvivalList.getString("strength");
+            String coverSurvivalListStealth = coverSurvivalList.getString("stealth");
+            String coverSurvivalListWeight = coverSurvivalList.getString("weight");
+            //Надевание и снятие доспехов
+            JSONObject wearRemoveArmors = obj.getJSONObject("wearRemoveArmors");
+            String wearRemoveArmorsName = wearRemoveArmors.getString("name");
+            JSONObject wearRemoveLightArmors = wearRemoveArmors.getJSONObject("lightArmor");
+            String wearLightArmors = wearRemoveLightArmors.getString("wear");
+            String removeLightArmors = wearRemoveLightArmors.getString("remove");
+            JSONObject wearRemoveMediumArmors = wearRemoveArmors.getJSONObject("mediumArmor");
+            String wearMediumArmors = wearRemoveMediumArmors.getString("wear");
+            String removeMediumArmors = wearRemoveMediumArmors.getString("remove");
+            JSONObject wearRemoveHeavyArmors = wearRemoveArmors.getJSONObject("heavyArmor");
+            String wearHeavyArmors = wearRemoveHeavyArmors.getString("wear");
+            String removeHeavyArmors = wearRemoveHeavyArmors.getString("remove");
+            JSONObject wearRemoveShields = wearRemoveArmors.getJSONObject("shield");
+            String wearShields = wearRemoveShields.getString("wear");
+            String removeShields = wearRemoveShields.getString("remove");
             //Вывод
             //Название
-            String equipmentsListName = equipmentListName;
-            equipmentName.setText(equipmentsListName);
+            String Armors1ListName = ArmorListName;
+            armorsListName.setText(Armors1ListName);
             //Владение доспехами
             String useArmorsListName = useArmorName;
             String useArmorsListDescription = useArmorDescription;
@@ -353,7 +398,7 @@ public class EquipmentActivity extends BaseActivity {
             //Стеганый
             quilted.setText(quiltedListName);
             quiltedInfo.setText(quiltedListDescription +
-                    "\nЦена: " + quiltedListPrice +
+                    "\n\nЦена: " + quiltedListPrice +
                     "\nКласс доспеха (КД): " + quiltedListAC +
                     "\nСила: " + quiltedListStrength +
                     "\nСкрытность: " + quiltedListStealth +
@@ -361,7 +406,7 @@ public class EquipmentActivity extends BaseActivity {
             //Кожаный
             leather.setText(leatherListName);
             leatherInfo.setText(leatherListDescription +
-                    "\nЦена: " + leatherListPrice +
+                    "\n\nЦена: " + leatherListPrice +
                     "\nКласс доспеха (КД): " + leatherListAC +
                     "\nСила: " + leatherListStrength +
                     "\nСкрытность: " + leatherListStealth +
@@ -369,7 +414,7 @@ public class EquipmentActivity extends BaseActivity {
             //Проклепанный кожаный
             rivetedLeather.setText(rivetedLeatherListName);
             rivetedLeatherInfo.setText(rivetedLeatherListDescription +
-                    "\nЦена: " + rivetedLeatherListPrice +
+                    "\n\nЦена: " + rivetedLeatherListPrice +
                     "\nКласс доспеха (КД): " + rivetedLeatherListAC +
                     "\nСила: " + rivetedLeatherListStrength +
                     "\nСкрытность: " + rivetedLeatherListStealth +
@@ -377,7 +422,7 @@ public class EquipmentActivity extends BaseActivity {
             //Шкурный
             selfish.setText(selfishListName);
             selfishInfo.setText(selfishListDescription +
-                    "\nЦена: " + selfishListPrice +
+                    "\n\nЦена: " + selfishListPrice +
                     "\nКласс доспеха (КД): " + selfishListAC +
                     "\nСила: " + selfishListStrength +
                     "\nСкрытность: " + selfishListStealth +
@@ -385,7 +430,7 @@ public class EquipmentActivity extends BaseActivity {
             //Кольчужная рубаха
             chainmailShirt.setText(chainmailShirtListName);
             chainmailShirtInfo.setText(chainmailShirtListDescription +
-                    "\nЦена: " + chainmailShirtListPrice +
+                    "\n\nЦена: " + chainmailShirtListPrice +
                     "\nКласс доспеха (КД): " + chainmailShirtListAC +
                     "\nСила: " + chainmailShirtListStrength +
                     "\nСкрытность: " + chainmailShirtListStealth +
@@ -393,7 +438,7 @@ public class EquipmentActivity extends BaseActivity {
             //Чешуйчатый
             scaly.setText(scalyListName);
             scalyInfo.setText(scalyListDescription +
-                    "\nЦена: " + scalyListPrice +
+                    "\n\nЦена: " + scalyListPrice +
                     "\nКласс доспеха (КД): " + scalyListAC +
                     "\nСила: " + scalyListStrength +
                     "\nСкрытность: " + scalyListStealth +
@@ -401,7 +446,7 @@ public class EquipmentActivity extends BaseActivity {
             //Кираса
             cuirass.setText(cuirassListName);
             cuirassInfo.setText(cuirassListDescription +
-                    "\nЦена: " + cuirassListPrice +
+                    "\n\nЦена: " + cuirassListPrice +
                     "\nКласс доспеха (КД): " + cuirassListAC +
                     "\nСила: " + cuirassListStrength +
                     "\nСкрытность: " + cuirassListStealth +
@@ -409,7 +454,7 @@ public class EquipmentActivity extends BaseActivity {
             //Колечный
             ringed.setText(ringedListName);
             ringedInfo.setText(ringedListDescription +
-                    "\nЦена: " + ringedListPrice +
+                    "\n\nЦена: " + ringedListPrice +
                     "\nКласс доспеха (КД): " + ringedListAC +
                     "\nСила: " + ringedListStrength +
                     "\nСкрытность: " + ringedListStealth +
@@ -417,7 +462,7 @@ public class EquipmentActivity extends BaseActivity {
             //Кольчуга
             chainMail.setText(chainMailListName);
             chainMailInfo.setText(chainMailListDescription +
-                    "\nЦена: " + chainMailListPrice +
+                    "\n\nЦена: " + chainMailListPrice +
                     "\nКласс доспеха (КД): " + chainMailListAC +
                     "\nСила: " + chainMailListStrength +
                     "\nСкрытность: " + chainMailListStealth +
@@ -425,7 +470,7 @@ public class EquipmentActivity extends BaseActivity {
             //Наборный
             composite.setText(compositeListName);
             compositeInfo.setText(compositeListDescription +
-                    "\nЦена: " + compositeListPrice +
+                    "\n\nЦена: " + compositeListPrice +
                     "\nКласс доспеха (КД): " + compositeListAC +
                     "\nСила: " + compositeListStrength +
                     "\nСкрытность: " + compositeListStealth +
@@ -433,28 +478,63 @@ public class EquipmentActivity extends BaseActivity {
             //Латы
             lats.setText(latsListName);
             latsInfo.setText(latsListDescription +
-                    "\nЦена: " + latsListPrice +
+                    "\n\nЦена: " + latsListPrice +
                     "\nКласс доспеха (КД): " + latsListAC +
                     "\nСила: " + latsListStrength +
                     "\nСкрытность: " + latsListStealth +
                     "\nВес: " + latsListWeight);
             //Щит
-            shields.setText(shield1ListName);
+            shield.setText(shield1ListName);
             shieldInfo.setText(shield1ListDescription +
-                    "\nЦена: " + shield1ListPrice +
+                    "\n\nЦена: " + shield1ListPrice +
                     "\nКласс доспеха (КД): " + shield1ListAC +
                     "\nСила: " + shield1ListStrength +
                     "\nСкрытность: " + shield1ListStealth +
                     "\nВес: " + shield1ListWeight);
+            //Покров выживания
+            coverSurvival.setText(coverSurvivalListName);
+            coverSurvivalInfo.setText(coverSurvivalListDescription +
+                    "\n\nЦена: " + coverSurvivalListPrice +
+                    "\nКласс доспеха (КД): " + coverSurvivalListAC +
+                    "\nСила: " + coverSurvivalListStrength +
+                    "\nСкрытность: " + coverSurvivalListStealth +
+                    "\nВес: " + coverSurvivalListWeight);
+            //Надевание и снятие доспехов
+            wearRemoveArmorsList.setText(wearRemoveArmorsName);
+            String wearRemoveLightArmorName = "Легкий доспех";
+            String wearLightArmor = wearLightArmors;
+            String removeLightArmor = removeLightArmors;
+            setBoldWRText(wearRemoveLightArmor, wearRemoveLightArmorName, wearLightArmor, removeLightArmor);
+            String wearRemoveMediumArmorName = "Средний доспех";
+            String wearMediumArmor = wearMediumArmors;
+            String removeMediumArmor = removeMediumArmors;
+            setBoldWRText(wearRemoveMediumArmor, wearRemoveMediumArmorName, wearMediumArmor, removeMediumArmor);
+            String wearRemoveHeavyArmorName = "Тяжелый доспех";
+            String wearHeavyArmor = wearHeavyArmors;
+            String removeHeavyArmor = removeHeavyArmors;
+            setBoldWRText(wearRemoveHeavyArmor, wearRemoveHeavyArmorName, wearHeavyArmor, removeHeavyArmor);
+            String wearRemoveShieldName = "Щит";
+            String wearShield = wearShields;
+            String removeShield = removeShields;
+            setBoldWRText(wearRemoveShield, wearRemoveShieldName, wearShield, removeShield);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    //Выделение жирным первой части текста
     private void setBoldText(TextView textView, String name, String description) {
-        String fullText = name + ". " + description;
-        SpannableString  spannable = new SpannableString(fullText);
-        spannable.setSpan(new StyleSpan(Typeface.BOLD),0, name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        String nameList = name + ". ";
+        String fullText = nameList + description;
+        SpannableString spannable = new SpannableString(fullText);
+        spannable.setSpan(new StyleSpan(Typeface.BOLD),0, nameList.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(spannable);
+    }
+    //Выделение жирным первой части текста для надевания доспехов
+    private void setBoldWRText(TextView textView, String name, String wear, String remove) {
+        String fullText = name +
+                "\nНадеть: " + wear +
+                "\nСнять: " + remove;
+        SpannableString spannable = new SpannableString(fullText);
+        spannable.setSpan(new StyleSpan(Typeface.BOLD),0,name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.setText(spannable);
     }
 

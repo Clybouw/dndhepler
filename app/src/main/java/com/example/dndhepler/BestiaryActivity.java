@@ -42,7 +42,7 @@ public class BestiaryActivity extends BaseActivity {
         // Установка Toolbar как ActionBar
         setSupportActionBar(toolbar);
         // Отключение стандартного названия
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("Бестиарий");
         // Получение RecyclerView
         RecyclerView recyclerView = findViewById(R.id.bestiaryView);
         // Установка вертикального списка

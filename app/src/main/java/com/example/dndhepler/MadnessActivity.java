@@ -10,13 +10,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.FileInputStream;
 
-public class MadnessActivity extends AppCompatActivity{
+public class MadnessActivity extends BaseActivity {
 
     private Toolbar toolbar;
 

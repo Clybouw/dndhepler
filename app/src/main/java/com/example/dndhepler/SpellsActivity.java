@@ -35,7 +35,7 @@ public class SpellsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_spells);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("Заклинания");
         RecyclerView recyclerView = findViewById(R.id.spellsView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         spells24 = loadJson("Spells5e24.json");

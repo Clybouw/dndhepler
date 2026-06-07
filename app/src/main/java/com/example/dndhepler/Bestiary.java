@@ -11,7 +11,7 @@ public class Bestiary {
     public String abilities;
     public String skills;
     public String resists;
-    public  String immuns;
+    public String immuns;
     public String feel;
     public String languages;
     public String area;

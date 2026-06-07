@@ -22,11 +22,11 @@ public class ConditionsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_madness);
+        setContentView(R.layout.activity_conditions);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        TextView madnessInfo = findViewById(R.id.madnessInfo);
+        TextView conditionInfo = findViewById(R.id.conditionsInfo);
 
         try {
             //Путь к файлу
@@ -75,10 +75,10 @@ public class ConditionsActivity extends BaseActivity {
                     "\n\nПарализованный\n\n" + paralyzed +
                     "\n\nСбитый с ног / Лежащий ничком\n\n" + prone +
                     "\n\nСхваченный\n\n" + grappled;
-            madnessInfo.setText(result);
+            conditionInfo.setText(result);
         } catch (Exception e) {
             e.printStackTrace();
-            madnessInfo.setText("Ошибка загрузки JSON");
+            conditionInfo.setText("Ошибка загрузки JSON");
         }
 
     }

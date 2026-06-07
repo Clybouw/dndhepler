@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Dndhepler">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:theme="@style/Base.Theme.Dndhepler"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +36,8 @@
         <activity android:name=".GameMechanicActivity" />
         <activity android:name=".MadnessActivity" />
         <activity android:name=".ConditionsActivity" />
-        <activity android:name=".EquipmentActivity" />
+        <activity android:name=".ArmorsActivity" />
+        <activity android:name=".WeaponsActivity" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

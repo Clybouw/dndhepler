@@ -5,6 +5,9 @@
         <item name="android:textColorPrimary">@color/black</item>
         <item name="colorOnBackground">@color/black</item>
         <item name="colorOnSurface">@color/black</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowBackground">@color/moccasin</item>
     </style>
     <style name="Theme.Dndhepler" parent="Base.Theme.Dndhepler" />
 </resources>

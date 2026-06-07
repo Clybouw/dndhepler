@@ -19,5 +19,6 @@
     <string name="download">Загрузить</string>
     <string name="madness">Безумие</string>
     <string name="condition">Состояния</string>
-    <string name="equipment">Снаряжение</string>
+    <string name="armor">Доспехи</string>
+    <string name="weapon">Оружие</string>
 </resources>

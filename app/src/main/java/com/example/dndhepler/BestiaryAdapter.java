@@ -40,7 +40,6 @@ public class BestiaryAdapter extends RecyclerView.Adapter<BestiaryAdapter.ViewHo
     public void onBindViewHolder(
             // ViewHolder текущего элемента
             @NonNull ViewHolder holder, int position) {
-        //Цвет текста в теории
         // Получаем монстра по позиции
         Bestiary monster = monsters.get(position);
         // Устанавливаем опасность в первый TextView

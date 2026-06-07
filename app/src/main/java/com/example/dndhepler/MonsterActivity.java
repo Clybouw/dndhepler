@@ -14,7 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MonsterActivity extends AppCompatActivity {
+public class MonsterActivity extends BaseActivity {
 
     private Toolbar toolbar;
 

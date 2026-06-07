@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="@color/moccasin">
 
 
@@ -52,18 +53,34 @@
         app:layout_constraintTop_toBottomOf="@+id/madness_view" />
 
     <TextView
-        android:id="@+id/equipment_view"
+        android:id="@+id/armor_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="serif"
-        android:text="@string/equipment"
+        android:text="@string/armor"
         android:textSize="24sp"
         android:textColor="@color/black"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/condition_view" />
+
+    <TextView
+        android:id="@+id/weapon_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="serif"
+        android:text="@string/weapon"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/armor_view" />
 </androidx.constraintlayout.widget.ConstraintLayout>
