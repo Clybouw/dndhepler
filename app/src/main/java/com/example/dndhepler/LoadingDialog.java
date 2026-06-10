@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
-
 import java.util.ArrayList;
 
 public class LoadingDialog {
@@ -38,12 +37,16 @@ public class LoadingDialog {
                             boolean loadBestiary24,
                             boolean loadBestiary14,
                             boolean loadSpells24,
-                            boolean loadSpells14) {
+                            boolean loadSpells14,
+                            boolean loadItems24,
+                            boolean loadItems14) {
         View view = activity.getLayoutInflater().inflate(R.layout.loading_dialog, null);
         TextView bestiary24Status = view.findViewById(R.id.statusBestiary24);
         TextView bestiary14Status = view.findViewById(R.id.statusBestiary14);
         TextView spells24Status = view.findViewById(R.id.statusSpells24);
         TextView spells14Status = view.findViewById(R.id.statusSpells14);
+        TextView items24Status = view.findViewById(R.id.statusItems24);
+        TextView items14Status = view.findViewById(R.id.statusItems14);
         if (!loadBestiary24) {
             bestiary24Status.setVisibility(View.GONE);
         }
@@ -55,6 +58,12 @@ public class LoadingDialog {
         }
         if (!loadSpells14) {
             spells14Status.setVisibility(View.GONE);
+        }
+        if (!loadItems24) {
+            items24Status.setVisibility(View.GONE);
+        }
+        if (!loadItems14) {
+            items14Status.setVisibility(View.GONE);
         }
         Button buttonClose = view.findViewById(R.id.closeButton);
         AlertDialog dialog = new AlertDialog.Builder(activity).setView(view).setCancelable(false).create();
@@ -173,6 +182,64 @@ public class LoadingDialog {
                     public void onError(Exception e) {
                         activity.runOnUiThread(() -> {
                             spells14Status.setText("Заклинания 14\nОшибка: " + e.getMessage());
+                        });
+                        listener.onError(e);
+                    }
+                });
+            });
+        }
+        if (loadItems24) {
+            taskList.add(listener -> {
+                Loading.items24Load(activity, new Loading.LoadListener() {
+                    @Override
+                    public void onProgress(int current, int total, String name) {
+                        activity.runOnUiThread(() -> {
+                            items24Status.setText("Магические предметы 24\n" + current + "/" + total + "\n" + name);
+                        });
+                        listener.onProgress(current, total, name);
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        activity.runOnUiThread(() -> {
+                            items24Status.setText("Магические предметы 24\nЗагрузка завершена");
+                        });
+                        listener.onFinish();
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        activity.runOnUiThread(() -> {
+                            items24Status.setText("Магические предметы 24\nОшибка: " + e.getMessage());
+                        });
+                        listener.onError(e);
+                    }
+                });
+            });
+        }
+        if (loadItems14) {
+            taskList.add(listener -> {
+                Loading.items14load(activity, new Loading.LoadListener() {
+                    @Override
+                    public void onProgress(int current, int total, String name) {
+                        activity.runOnUiThread(() -> {
+                            items14Status.setText("Магические предметы 14\n"+ current + "/" + total + "\n" + name);
+                        });
+                        listener.onProgress(current, total, name);
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        activity.runOnUiThread(() -> {
+                            items14Status.setText("Магические предметы 14\nЗагрузка завершена");
+                        });
+                        listener.onFinish();
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        activity.runOnUiThread(() -> {
+                            items14Status.setText("Магические предметы 14\nОшибка: " + e.getMessage());
                         });
                         listener.onError(e);
                     }

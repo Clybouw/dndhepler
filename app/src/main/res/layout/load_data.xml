@@ -44,6 +44,24 @@
         android:textColor="@color/black"
         android:textSize="24sp" />
 
+    <CheckBox
+        android:id="@+id/items24Load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="@string/items24"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
+    <CheckBox
+        android:id="@+id/items14Load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="@string/items14"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

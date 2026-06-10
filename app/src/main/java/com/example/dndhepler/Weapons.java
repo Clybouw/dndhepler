@@ -37,7 +37,6 @@ public class Weapons {
     public String getWeight() {
         return weight;
     }
-
     public String getProperty() {
         return property;
     }

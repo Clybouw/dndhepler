@@ -9,10 +9,14 @@
     <string name="bestiary24">Бестиарий 24</string>
     <string name="spells14">Заклинания 14</string>
     <string name="spells24">Заклинания 24</string>
+    <string name="items24">Магические предметы 24</string>
+    <string name="items14">Магические предметы 14</string>
     <string name="waitBetiary24">Бестиарий 24: ожидание</string>
     <string name="waitBetiary14">Бестиарий 14: ожидание</string>
     <string name="waitSpells24">Заклинания 24: ожидание</string>
     <string name="waitSpells14">Заклинания 14: ожидание</string>
+    <string name="waitItems24">Магические предметы 24: ожидание</string>
+    <string name="waitItems14">Магические предметы 14: ожидание</string>
     <string name="filter">Фильтр</string>
     <string name="back">Назад</string>
     <string name="thanks">Спасибо</string>
@@ -21,4 +25,6 @@
     <string name="condition">Состояния</string>
     <string name="armor">Доспехи</string>
     <string name="weapon">Оружие</string>
+    <string name="item">Магические предметы</string>
+    <string name="action">Действия</string>
 </resources>

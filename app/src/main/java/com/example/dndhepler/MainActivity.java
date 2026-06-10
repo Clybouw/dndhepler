@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity {
 
     private void copyJsonFilesFirstLaunch() {
         SharedPreferences prefs = getSharedPreferences("app", MODE_PRIVATE);
-        int currentDataVersion = 3; //Значение 3 для версии 0.4, обновить если нужно загрузить новые json
+        int currentDataVersion = 4; //Значение 4 для версии 0.5, обновить если нужно загрузить новые json
         int savedVersion = prefs.getInt("data_version", 0);
         if (savedVersion >= currentDataVersion) {
             return;}
@@ -62,7 +62,10 @@ public class MainActivity extends BaseActivity {
                 "Madness5e14.json",
                 "Conditions5e14.json",
                 "Armors5e14.json",
-                "Weapons5e14.json"
+                "Weapons5e14.json",
+                "Items5e14.json",
+                "Items5e24.json",
+                "Actions5e14.json"
         };
         try {
             for (String fileName : files) {

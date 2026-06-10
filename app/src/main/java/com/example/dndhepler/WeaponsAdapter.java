@@ -38,8 +38,7 @@ public class WeaponsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         CategoryWeapons item = list.get(position);
         if (holder instanceof CategoryViewHolder) {
             ((CategoryViewHolder) holder).categoryName.setText(item.getCategoryName());
-        }
-        else if (holder instanceof WeaponsViewHolder) {
+        } else if (holder instanceof WeaponsViewHolder) {
             Weapons weapons = item.getWeapons();
             WeaponsViewHolder viewHolder = (WeaponsViewHolder) holder;
             viewHolder.weaponsName.setText(weapons.getName());

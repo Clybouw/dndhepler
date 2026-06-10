@@ -40,7 +40,11 @@ public class Loading {
         new Thread(() -> {
             try {
                 // Загрузка страницы bestiary
-                Document bestiary = Jsoup.connect("https://next.dnd.su/bestiary/").userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)").referrer("https://www.google.com").timeout(10000).get();
+                Document bestiary = Jsoup.connect("https://next.dnd.su/bestiary/")
+                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
+                        .referrer("https://www.google.com")
+                        .timeout(10000)
+                        .get();
                 // Получение карточек монстров
                 Elements bestiaryUnits = bestiary.select("script");
                 String listJson = null;
@@ -72,11 +76,10 @@ public class Loading {
                     JSONObject jsonObject = new JSONObject();
                     // Получение href
                     String href = card.getString("link");
+                    // Формирование ссылки
                     String url = href.startsWith("http")
                             ? href
                             : "https://next.dnd.su" + href;
-                    listener.onProgress(i + 1, total, name);
-                    // Формирование ссылки
                     listener.onProgress(i + 1, total, name);
                     // Загрузка страницы монстра
                     Document UnitInfo = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)").referrer("https://www.google.com").timeout(10000).get();
@@ -521,6 +524,187 @@ public class Loading {
                 }
                 FileOutputStream fos = context.openFileOutput("Spells5e14.json", Context.MODE_PRIVATE);
                 fos.write(spellsArray.toString(4).getBytes());
+                fos.close();
+                listener.onFinish();
+            } catch (Exception e) {
+                e.printStackTrace();
+                listener.onError(e);
+            }
+        }).start();
+    }
+
+    public static void items24Load(Context context, LoadListener listener) {
+        new Thread(() -> {
+            try {
+                Document items = Jsoup.connect("https://next.dnd.su/items/")
+                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
+                        .referrer("https://www.google.com")
+                        .timeout(10000)
+                        .get();
+                Elements scripts = items.select("script");
+                String listJson = null;
+                for (Element script : scripts) {
+                    String html = script.html();
+                    if ( html.contains("window.LIST")) {
+                        listJson = html;
+                        break;
+                    }
+                }
+                listJson = listJson.replace("window.LIST = ", "");
+                listJson = listJson.substring(0, listJson.indexOf("};") + 1);
+                JSONObject listObject = new JSONObject(listJson);
+                JSONArray cards = listObject.getJSONArray("cards");
+                JSONArray itemsArray = new JSONArray();
+                int total = cards.length();
+                for (int i = 0; i < cards.length(); i++) {
+                    JSONObject card = cards.getJSONObject(i);
+                    String name = card.getString("title");
+                    String href = card.getString("link");
+                    String url = href.startsWith("http")
+                            ? href
+                            : "https://next.dnd.su" + href;
+                    Document itemsInfo = Jsoup.connect(url)
+                            .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
+                            .referrer("https://www.google.com")
+                            .timeout(10000)
+                            .get();
+                    String aligment = itemsInfo.select("li.size-type-alignment").text();
+                    String price = itemsInfo.select("li.price").text();
+                    StringBuilder descBuilder = new StringBuilder();
+                    Element descBlock = itemsInfo.selectFirst("[itemprop=description]");
+                    if (descBlock != null) {
+                        Elements params = descBlock.select("p");
+                        if (!params.isEmpty()) {
+                            for (Element p : params) {
+                                String text = p.text().trim();
+                                if (!text.isEmpty()) {
+                                    descBuilder.append(p.text()).append("\n\n");
+                                }
+                            }
+                        } else {
+                            String text = descBlock.text().trim();
+                            if (!text.isEmpty()) {
+                                descBuilder.append(text);
+                            }
+                        }
+                    }
+                    String description = descBuilder.toString();
+                    StringBuilder tableBuilder = new StringBuilder();
+                    Elements tables = itemsInfo.select("table");
+                    if (!tables.isEmpty()) {
+                        for (Element table : tables) {
+                            Elements rows = table.select("tr");
+                            for (Element row : rows) {
+                                Elements cols = row.select("td");
+                                for (int j = 0; j < cols.size(); j++) {
+                                    tableBuilder.append(cols.get(j).text().trim());
+                                    if (j < cols.size() - 1) {
+                                        tableBuilder.append(" / ");
+                                    }
+                                }
+                                tableBuilder.append("\n");
+                            }
+                        }
+                    }
+                    String tableDescription = tableBuilder.toString();
+                    listener.onProgress(i + 1, total, name);
+
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("name", name);
+                    jsonObject.put("url", url);
+                    jsonObject.put("aligment", aligment);
+                    jsonObject.put("price", price);
+                    jsonObject.put("description", description);
+                    jsonObject.put("tableDescription", tableDescription);
+                    itemsArray.put(jsonObject);
+                    Thread.sleep(500);
+                    System.out.println(itemsArray);
+                }
+                FileOutputStream fos = context.openFileOutput("Items5e24.json", Context.MODE_PRIVATE);
+                fos.write(itemsArray.toString(4).getBytes());
+                fos.close();
+                listener.onFinish();
+            } catch (Exception e) {
+                e.printStackTrace();
+                listener.onError(e);
+            }
+        }).start();
+    }
+
+    public static void items14load(Context context, LoadListener listener) {
+        new Thread(() -> {
+            try {
+                Document items = Jsoup.connect("https://5e14.dnd.su/piece/items/index-list/")
+                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
+                        .referrer("https://www.google.com")
+                        .timeout(10000)
+                        .get();
+                Elements itemsList = items.select(".for_filter");
+                JSONArray itemsArray = new JSONArray();
+                int total = itemsList.size();
+                for (int i = 0; i < total; i++) {
+                    Element item = itemsList.get(i);
+                    String name = item.select(".list-item-title").text();
+                    String href = item.select("a").attr("href");
+                    String url = "https://5e14.dnd.su" + href;
+                    listener.onProgress(i + 1, total, name);
+                    Document itemsInfo = Jsoup.connect(url)
+                            .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64)")
+                            .referrer("https://www.google.com")
+                            .timeout(10000)
+                            .get();
+                    String aligment = itemsInfo.select("li.size-type-alignment").text();
+                    String price = itemsInfo.select("li.price").text();
+                    StringBuilder descBuilder = new StringBuilder();
+                    Element descBlock = itemsInfo.selectFirst("[itemprop=description]");
+                    if (descBlock != null) {
+                        Elements params = descBlock.select("p");
+                        if (!params.isEmpty()) {
+                            for (Element p : params) {
+                                String text = p.text().trim();
+                                if (!text.isEmpty()) {
+                                    descBuilder.append(p.text()).append("\n\n");
+                                }
+                            }
+                        } else {
+                            String text = descBlock.text().trim();
+                            if (!text.isEmpty()) {
+                                descBuilder.append(text);
+                            }
+                        }
+                    }
+                    String description = descBuilder.toString();
+                    StringBuilder tableBuilder = new StringBuilder();
+                    Elements tables = itemsInfo.select("table");
+                    if (!tables.isEmpty()) {
+                        for (Element table : tables) {
+                            Elements rows = table.select("tr");
+                            for (Element row : rows) {
+                                Elements cols = row.select("td");
+                                for (int j = 0; j < cols.size(); j++) {
+                                    tableBuilder.append(cols.get(j).text().trim());
+                                    if (j < cols.size() - 1) {
+                                        tableBuilder.append(" / ");
+                                    }
+                                }
+                                tableBuilder.append("\n");
+                            }
+                        }
+                    }
+                    String tableDescription = tableBuilder.toString();
+
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("name", name);
+                    jsonObject.put("url", url);
+                    jsonObject.put("aligment", aligment);
+                    jsonObject.put("price", price);
+                    jsonObject.put("description", description);
+                    jsonObject.put("tableDescription", tableDescription);
+                    itemsArray.put(jsonObject);
+                    Thread.sleep(500);
+                }
+                FileOutputStream fos = context.openFileOutput("Items5e14.json", Context.MODE_PRIVATE);
+                fos.write(itemsArray.toString(4).getBytes());
                 fos.close();
                 listener.onFinish();
             } catch (Exception e) {
